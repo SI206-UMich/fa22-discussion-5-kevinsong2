@@ -38,7 +38,7 @@ class Warehouse:
 
 	# Adds an item to the warehouse	
 	def add_item(self, item):
-		self.items.append(item.name)
+		self.items.append(item)
 
 	# Returns the item in the warehouse with the most stock		
 	def get_max_stock(self):
@@ -78,17 +78,21 @@ class TestAllMethods(unittest.TestCase):
 		self.w1 = Warehouse([])
 		self.w1.add_item(self.item1)
 	
-		self.assertEqual(self.w1.items, ["Beer"])
+		self.assertEqual(self.w1.items, [self.item1])
 
 		self.w1.add_item(self.item2)
 
-		assert self.w1.items == ["Beer", "Cider"]
+		assert self.w1.items == [self.item1, self.item2]
 
 	## Check to see whether warehouse correctly returns the item with the most stock
 	def test_warehouse_max_stocks(self):
 		self.w1 = Warehouse([])
 		self.w1.add_item(self.item1)
 		assert self.w1.get_max_stock() == "Beer"
+
+		self.w1.add_item(self.item3)
+
+		assert self.w1.get_max_stock() == "Water"
 
 
 	# Check to see whether the warehouse correctly return the item with the highest price
